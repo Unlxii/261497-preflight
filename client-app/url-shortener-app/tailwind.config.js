@@ -10,6 +10,8 @@ export default {
       },
       colors: {
         "white-tho": "#FAF8F6",
+        "black-tho": "#1D1C1A",
+        "blue-tho": "#B6D8FF",
       },
     },
   },
