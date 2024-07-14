@@ -6,6 +6,7 @@ import Register from "./pages/Regiser";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 interface IAppProps {}
 
@@ -13,6 +14,7 @@ const App: React.FunctionComponent<IAppProps> = () => {
   return (
     <>
       <Header />
+      <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Register />}></Route>
