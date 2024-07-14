@@ -7,12 +7,12 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-
+import { UserContextProvider } from "./context/userContext";
 interface IAppProps {}
 
 const App: React.FunctionComponent<IAppProps> = () => {
   return (
-    <>
+    <UserContextProvider>
       <Header />
       <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
       <Routes>
@@ -22,7 +22,7 @@ const App: React.FunctionComponent<IAppProps> = () => {
         <Route path="/main" element={<Container />}></Route>
       </Routes>
       <Footer />
-    </>
+    </UserContextProvider>
   );
 };
 
