@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/dbConfig";
 import shortUrl from "./routes/shortUrl";
 import authRoutes from "./routes/authRoutes";
+import cookieParser from "cookie-parser";
 dotenv.config();
 connectDB();
 
@@ -11,7 +12,8 @@ const port = process.env.PORT || 5001;
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/", shortUrl);
