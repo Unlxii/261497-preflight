@@ -1,11 +1,6 @@
-import { rejects } from "assert";
-import { hash } from "crypto";
-import { resolve } from "path";
-import { PassThrough } from "stream";
+import bcrypt from "bcrypt";
 
-const bcrypt = require("bcrypt");
-
-const hashPassword = (password: String) => {
+const hashPassword = (password: string) => {
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(12, (err: any, salt: any) => {
       if (err) {
