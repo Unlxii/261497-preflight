@@ -57,7 +57,6 @@ export const loginUser = async (req: Request, res: Response) => {
       res.cookie("token", token, {
         httpOnly: true,
         sameSite: "strict",
-        secure: process.env.NODE_ENV === "production",
       });
 
       // Send success response
@@ -71,4 +70,25 @@ export const loginUser = async (req: Request, res: Response) => {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
   }
+};
+
+// Get profile endpoint
+export const getProfile = (req: Request, res: Response) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return res.json(null);
+  }
+
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT secret is not defined");
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err: any, user: any) => {
+    if (err) {
+      console.error(err);
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    res.json(user);
+  });
 };
