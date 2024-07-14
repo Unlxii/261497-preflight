@@ -1,8 +1,7 @@
 const User = require("../model/user");
 const { hashPassword, comparePassword } = require("../helpers/auth");
-import { error } from "console";
-import { defaultMaxListeners } from "events";
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 
 // register endpoint
 export const registerUser = async (req: Request, res: Response) => {
@@ -45,12 +44,28 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
-
     const match = await comparePassword(password, user.password);
+    if (match) {
+      // Generate JWT token
+      const token = jwt.sign(
+        { userId: user._id, email: user.email },
+        process.env.JWT_SECRET!,
+        { expiresIn: "1h" }
+      );
+
+      // Set token as a cookie
+      res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production",
+      });
+
+      // Send success response
+      res.status(200).json({ message: "Login successful", user });
+    }
     if (!match) {
       return res.status(400).json({ error: "Invalid password" });
     }
-
     res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.log(error);
