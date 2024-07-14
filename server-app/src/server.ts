@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/dbConfig";
 import shortUrl from "./routes/shortUrl";
+import authRoutes from "./routes/authRoutes";
 dotenv.config();
 connectDB();
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/", shortUrl);
+app.use("/api/auth", authRoutes);
 // app.get("/", (req, res) => {
 //   res.send("Welcome to the URL Shortener API");
 
