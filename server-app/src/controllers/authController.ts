@@ -1,5 +1,5 @@
 const User = require("../model/user");
-
+const { hashPassword, comparePassword } = require("../helpers/auth");
 import { Request, Response } from "express";
 
 const registerUser = async (req: Request, res: Response) => {
@@ -24,7 +24,8 @@ const registerUser = async (req: Request, res: Response) => {
         error: "Email is already taken",
       });
     }
-    const user = await User.create({ name, email, password });
+    const hashedPassword = await hashPassword(password);
+    const user = await User.create({ name, email, password: hashedPassword });
     return res.json(user);
   } catch (error) {
     console.log(error);
