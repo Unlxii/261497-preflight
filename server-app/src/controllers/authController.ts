@@ -31,4 +31,4 @@ const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = registerUser;
+export default registerUser;
