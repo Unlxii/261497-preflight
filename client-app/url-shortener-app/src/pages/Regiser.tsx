@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const Regiser = () => {
+const Register = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
@@ -65,4 +65,4 @@ const Regiser = () => {
   );
 };
 
-export default Regiser;
+export default Register;
