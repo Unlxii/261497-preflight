@@ -1,15 +1,8 @@
-const express = require("express");
-const router = express.Router;
-const cors = require("cors");
-const { registerUser } = require("../controllers/authController");
+import express from "express";
+import registerUser from "../controllers/authController";
 
-router.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000",
-  })
-);
+const router = express.Router();
 
 router.post("/register", registerUser);
 
-module.exports = router;
+export default router;
