@@ -6,10 +6,15 @@ const userSchema = new Schema({
   email: {
     type: String,
     unique: true,
+    require: true,
   },
   password: String,
+  urls: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ShortUrl",
+    },
+  ],
 });
 
-const UserModel = mongoose.model("User", userSchema);
-
-module.exports = UserModel;
+export const UserModel = mongoose.model("User", userSchema);
