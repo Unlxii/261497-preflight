@@ -65,7 +65,6 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!match) {
       return res.status(400).json({ error: "Invalid password" });
     }
-    res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
@@ -73,8 +72,8 @@ export const loginUser = async (req: Request, res: Response) => {
 };
 
 // Get profile endpoint
-export const getProfile = (req: Request, res: Response) => {
-  const { token } = req.cookies;
+export const getProfile = async (req: Request, res: Response) => {
+  const { token } = await req.cookies;
 
   if (!token) {
     return res.json(null);
