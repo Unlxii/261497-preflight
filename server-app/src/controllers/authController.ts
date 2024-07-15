@@ -1,4 +1,4 @@
-const User = require("../model/user");
+const User = require("../models/user");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
