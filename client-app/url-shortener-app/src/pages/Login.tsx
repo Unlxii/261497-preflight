@@ -36,24 +36,35 @@ const Login = () => {
     }
   };
   return (
-    <div>
-      <form onSubmit={loginUser}>
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="enter email..."
-          value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="enter password..."
-          value={data.password}
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="flex p-4 justify-center bg-blue-400">
+      <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+        <h1 className="text-center font-bold text-xl">Sign In</h1>
+        <form onSubmit={loginUser} className="w-screen">
+          <label>Email</label>
+          <div>
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={data.email}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+            />
+          </div>
+          <label>Password</label>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
+            />
+          </div>
+          <div className="bg-blue-500 text-center text-xs text-white rounded">
+            <button type="submit" className="h-7">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
