@@ -2,7 +2,7 @@ import * as React from "react";
 import Header from "./component/Header/Header";
 import Footer from "./component/Footer/Footer";
 import Container from "./component/Container/Container";
-import Register from "./pages/Regiser";
+import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
