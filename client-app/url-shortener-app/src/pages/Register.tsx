@@ -69,11 +69,12 @@ const Register = () => {
             value={data.password}
             onChange={(e) => setData({ ...data, password: e.target.value })}
           />
-          <div className="bg-blue-500 text-center text-xs text-white rounded">
-            <button type="submit" className="h-7">
-              Sign Up
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="h-7 bg-blue-500 text-center text-xs text-white rounded w-full"
+          >
+            Sign Up
+          </button>
         </form>
       </div>
     </div>
