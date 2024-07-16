@@ -87,7 +87,7 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   const deleteUrl = async (id: string) => {
     try {
       const response = await axios.delete(`${ServerUrl}/shortUrl/${id}`);
-      console.log(response, `is deletedsuccessfully`);
+      console.log(response, `is deleted successfully`);
       window.location.reload();
     } catch (error) {
       console.log(error);
