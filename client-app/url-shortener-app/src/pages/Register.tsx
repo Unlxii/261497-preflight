@@ -39,14 +39,7 @@ const Register = () => {
     <div className="flex p-4 justify-center bg-blue-400">
       <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
         <h1 className="text-center font-bold text-xl">Sign Up</h1>
-        <div className="text-center mb-2">
-          <text className="text-gray-500">
-            Already registered?{" "}
-            <a href="/login" className="text-blue-500">
-              Sign In
-            </a>
-          </text>
-        </div>
+        <div className="text-center mb-2"></div>
         <form onSubmit={registerUser} className="w-screen">
           <label>Username</label>
           <input
@@ -76,6 +69,12 @@ const Register = () => {
             Sign Up
           </button>
         </form>
+        <div className="text-gray-500 text-sm mt-2">
+          Already registered?{" "}
+          <a href="/login" className="text-blue-500">
+            Sign In
+          </a>
+        </div>
       </div>
     </div>
   );
