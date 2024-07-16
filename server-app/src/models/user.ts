@@ -8,7 +8,8 @@ const userSchema = new Schema({
     unique: true,
     require: true,
   },
-  password: { type: String },
+  password: { type: String, required: true },
+  urls: [{ type: mongoose.Schema.Types.ObjectId, ref: "ShortUrl" }],
 });
 
 const UserModel = mongoose.model("User", userSchema);
