@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Register from "./Register";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Login = () => {
           email: "",
           password: "",
         });
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -60,11 +61,17 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="h-7 bg-blue-500 text-center text-xs text-white rounded w-full"
+            className="h-7 bg-blue-500 text-center text-xs text-white rounded w-full mt-1"
           >
             Submit
           </button>
         </form>
+        <div className="text-gray-500 mt-4 text-sm">
+          don't have an account?{" "}
+          <a className="text-blue-500" href="/register">
+            Register
+          </a>
+        </div>
       </div>
     </div>
   );
