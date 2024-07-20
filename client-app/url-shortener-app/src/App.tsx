@@ -13,7 +13,6 @@ interface IAppProps {}
 const App: React.FunctionComponent<IAppProps> = () => {
   return (
     <UserContextProvider>
-      <Header />
       <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
@@ -21,7 +20,6 @@ const App: React.FunctionComponent<IAppProps> = () => {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/main" element={<Container />}></Route>
       </Routes>
-      <Footer />
     </UserContextProvider>
   );
 };
