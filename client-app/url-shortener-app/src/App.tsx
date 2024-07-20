@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./context/userContext";
+import Dashboard from "./pages/Dashboard";
 interface IAppProps {}
 
 const App: React.FunctionComponent<IAppProps> = () => {
@@ -16,7 +17,7 @@ const App: React.FunctionComponent<IAppProps> = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/main" element={<Container />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </UserContextProvider>
   );
