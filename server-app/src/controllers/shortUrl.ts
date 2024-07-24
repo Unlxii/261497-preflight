@@ -4,6 +4,7 @@ import { url } from "inspector";
 import e from "express";
 import { Types } from "mongoose";
 import UserModel from "../models/user";
+import { Request, Response } from "express";
 
 export const createUrl = async (req: express.Request, res: express.Response) => {
     try {
@@ -90,4 +91,21 @@ export const createUrl = async (req: express.Request, res: express.Response) => 
     } catch (error) {
         res.status(500).send({ message: "Something went wrong!" });
     }
+    
     };
+    export const getShortUrlsByUserId = async (req: Request, res: Response) => {
+      try {
+        const { userId } = req.params;
+        const shortUrls = await urlModel.find({ user: userId });
+    
+        if (shortUrls.length === 0) {
+          return res.status(404).json({ message: "No short URLs found for this user" });
+        }
+    
+        res.json(shortUrls);
+      } catch (error) {
+        console.error("Error fetching short URLs:", error);
+        res.status(500).json({ message: "Server error" });
+      }
+    };
+    
