@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import FormContainer from "../component/FormContainer/FormContainer.tsx";
+import { useState, useEffect } from "react";
+import FormContainer from "../components/FormContainer/FormContainer.tsx";
 import { UrlData } from "../interface/UrlData";
 import { ServerUrl } from "../helper/Constants";
 import axios from "axios";
@@ -52,7 +52,7 @@ const PullingTest: React.FunctionComponent<PullingTestProps> = ({ userId }) => {
     return (
       <>
         <FormContainer />
-        <DataTable data={data}  /> 
+        <DataTable data={data} />
       </>
     );
   }
@@ -60,6 +60,5 @@ const PullingTest: React.FunctionComponent<PullingTestProps> = ({ userId }) => {
 
 export default PullingTest;
 function fetchTableData() {
-  throw new Error('Function not implemented.');
+  throw new Error("Function not implemented.");
 }
-
