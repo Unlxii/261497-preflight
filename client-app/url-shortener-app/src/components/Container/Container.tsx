@@ -4,20 +4,40 @@ import { UrlData } from "../../interface/UrlData";
 import { ServerUrl } from "../../helper/Constants";
 import axios from "axios";
 import DataTable from "../../Datatable/Datatable";
+import { useUserContext } from "../../context/userContext";
 
 interface IContainerProps {}
 
 const Container: React.FunctionComponent<IContainerProps> = () => {
+  const { user } = useUserContext();
   const [data, setData] = React.useState<UrlData[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
   const fetchTableData = async () => {
-    const response = await axios.get(`${ServerUrl}/ShortUrl`);
-    console.log("the response is:", response.data);
-    setData(response.data);
-    console.log("the data is:", data);
+    if (!user) {
+      console.error("User is not logged in");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${ServerUrl}/public/user/username/${user.name}/shortUrls`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
   React.useEffect(() => {
     fetchTableData();
-  }, []);
+  }, [user]);
+
+  if (loading) return <p>Loading...</p>;
+
   return (
     <>
       <FormContainer />
