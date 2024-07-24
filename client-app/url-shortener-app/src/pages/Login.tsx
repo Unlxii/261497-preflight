@@ -1,30 +1,33 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext, FormEvent } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
-const Login = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
-  const loginUser = async (e: React.FormEvent<HTMLFormElement>) => {
+  const loginUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = data;
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:5001/api/auth/login",
         {
           email,
           password,
         }
       );
-      if (data.error) {
-        toast.error(data.error);
+      if (response.data.error) {
+        toast.error(response.data.error);
       } else {
+        const user = response.data.user;
+        setUser(user);
         setData({
           email: "",
           password: "",
@@ -35,6 +38,7 @@ const Login = () => {
       console.log(error);
     }
   };
+
   return (
     <div className="flex h-screen bg-blue-400 justify-center items-center">
       <div className="p-4">
