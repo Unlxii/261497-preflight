@@ -12,28 +12,30 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   const { data } = props;
   console.log("the data is table:", data);
   const renderTableData = () => {
+    if (!Array.isArray(data) || data.length === 0) {
+      return (
+        <tr>
+          <td colSpan={3} className="px-6 py-3 text-center">No short URLs found for this user.</td>
+        </tr>
+      );
+    }
+
     return data.map((item) => {
+  
       return (
         <tr
           key={item._id}
-          className="border-b text-white bg-gray-600 hover:bg-blue-tho hover:text-gray-80"
+        className="border-b text-white bg-gray-600 hover:bg-blue-tho hover:text-gray-80"
         >
           <td className="px-6 py-3">
-            <Link
-              to={`${ServerUrl}/shortUrl/${item.shortUrl}`}
-              target="_blank"
-              rel="noreferer noopener"
-            >
-              {item.fullUrl}
-            </Link>
-          </td>
-          <td className="px-6 py-3">{item.createdAt.toString()}</td>
-          <td className=" px-96 py-3">
+          <Link to={`${ServerUrl}/shortUrl/${item.shortUrl}`} target="_blank" rel="noreferrer noopener">
+            {item.fullUrl}
+          </Link>
+        </td>
+        <td className="px-6 py-3">{item.createdAt.toString()}</td>
+          <td className=" px-6 py-3">
             <div className="flex-content-center">
-              <div
-                className="cursor-pointer px-2"
-                onClick={() => copyToClipboard(item.shortUrl)}
-              >
+            <div className="cursor-pointer px-2" onClick={() => copyToClipboard(item.shortUrl)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -50,10 +52,7 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
                 </svg>
               </div>
               <div className="flex-content-center">
-                <div
-                  className="cursor-pointer px-2"
-                  onClick={() => deleteUrl(item._id)}
-                >
+              <div className="cursor-pointer px-2" onClick={() => deleteUrl(item._id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"

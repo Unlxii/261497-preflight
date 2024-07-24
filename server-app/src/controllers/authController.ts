@@ -71,7 +71,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-// Get profile endpoint
+//Get profile endpoint
 export const getProfile = async (req: Request, res: Response) => {
   const { token } = await req.cookies;
 
