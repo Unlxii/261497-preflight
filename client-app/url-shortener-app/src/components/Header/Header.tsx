@@ -28,7 +28,7 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           </span>
         </a>
       </div>
-      <text className="mr-4 font-bold">Hello, {user.name} </text>
+      <div className="font-bold mr-4">Hello, {user.name} </div>
     </nav>
   );
 };
