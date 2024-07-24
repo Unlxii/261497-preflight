@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext) || {};
 
   if (!user) {
     return <Navigate to="/login" replace />;
