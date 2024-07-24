@@ -76,7 +76,7 @@ export const getProfile = async (req: Request, res: Response) => {
   const { token } = await req.cookies;
 
   if (!token) {
-    return res.json(null);
+    return res.status(401).json({ error: "No token provided" });
   }
 
   if (!process.env.JWT_SECRET) {
