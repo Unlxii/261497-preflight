@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { UserContext } from "../context/userContext"; // Adjust import path as necessary
+import Container from "../components/Container/Container";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
 
 const Dashboard = () => {
   const context = useContext(UserContext);
@@ -17,9 +20,9 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Profile</h1>
-      <p>Email: {user.email}</p>
-      {/* Render more user details if needed */}
+      <Header />
+      <Container />
+      <Footer />
     </div>
   );
 };
