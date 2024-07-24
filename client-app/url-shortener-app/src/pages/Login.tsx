@@ -1,12 +1,12 @@
-import React, { useState, useContext, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/userContext";
+import { useUserContext } from "../context/userContext";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useUserContext();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -26,7 +26,7 @@ const Login: React.FC = () => {
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
-        const user = response.data.user;
+        const user = response.data.user; // Assuming the response contains user data
         setUser(user);
         setData({
           email: "",
