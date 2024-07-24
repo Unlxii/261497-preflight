@@ -5,6 +5,7 @@ import React, {
   createContext,
   ReactNode,
   FC,
+  useContext,
 } from "react";
 
 interface User {
@@ -29,7 +30,10 @@ interface UserContextProviderProps {
 export const UserContextProvider: FC<UserContextProviderProps> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const userData = localStorage.getItem("user");
+    return userData ? JSON.parse(userData) : null;
+  });
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -48,9 +52,25 @@ export const UserContextProvider: FC<UserContextProviderProps> = ({
     }
   }, [user]);
 
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
+};
+
+export const useUserContext = (): UserContextType => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUserContext must be used within a UserContextProvider");
+  }
+  return context;
 };
