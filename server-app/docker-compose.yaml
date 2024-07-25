@@ -1,0 +1,13 @@
+services:
+  mongodb:
+    image: mongodb/mongodb-atlas-local
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=Ton
+      - MONGODB_INITDB_ROOT_PASSWORD=FuyMqqwC0vLF4dcq
+      - CONNECTION_STRING=mongodb+srv://nue0742:C3yGdZudWxKMAvsR@url-shorter.gwa6kec.mongodb.net/?retryWrites=true&w=majority&appName=url-shorter
+    ports:
+      - 27019:27017
+    volumes:
+      - data:/data/db
+volumes:
+  data:
