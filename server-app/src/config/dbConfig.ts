@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   const mongoUri =
-    process.env.MONGO_URI || "mongodb://database:27017/shorterURL";
+    process.env.MONGO_URI || "mongodb://database:27017/shorterURL"; 
 
   try {
     const connect = await mongoose.connect(mongoUri, {
