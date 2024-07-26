@@ -23,7 +23,7 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           <span className="hover:drop-shadow-sm">
             KEEP.
             <sup className="text-indigo-300 not-italic font-bold top-[-25px] right-[7px] text-sm">
-              localhost
+              yourlinks :)
             </sup>
           </span>
         </a>
