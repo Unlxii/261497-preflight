@@ -1,12 +1,14 @@
 import * as React from "react";
 import axios from "axios";
+import { useState } from "react";
 import { ServerUrl } from "../../helper/Constants";
-import { useUserContext } from "../../context/userContext"; // Import useUserContext hook
-
-interface IFormContainerProps {}
+import { useUserContext } from "../../context/userContext";
+interface IFormContainerProps {
+  addUrl: (url: string) => Promise<void>;
+}
 
 const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
-  const [url, setUrl] = React.useState<string>("");
+  const [url, setUrl] = useState<string>("");
   const { user } = useUserContext();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
