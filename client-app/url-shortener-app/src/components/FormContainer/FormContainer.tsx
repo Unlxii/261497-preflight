@@ -74,7 +74,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
               type="submit"
               className="absolute top-2 end-2.5 p-2.5 text-sm font-medium h-lg text-black-100 bg-gray-200 rounded-full border-#1D1C1ADB focus:ring-2 focus:outline-none"
             >
-              search
+              Add
             </button>
           </div>
         </form>

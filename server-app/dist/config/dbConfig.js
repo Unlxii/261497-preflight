@@ -14,8 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const mongoUri = process.env.MONGO_URI || "mongodb://database:27017/shorterURL";
     try {
-        const connect = yield mongoose_1.default.connect(`${process.env.CONNECTION_STRING}`);
+        const connect = yield mongoose_1.default.connect(mongoUri, {
+            serverSelectionTimeoutMS: 30000,
+        });
         console.log("MongoDB Connected:", connect.connection.host, connect.connection.name);
     }
     catch (error) {
