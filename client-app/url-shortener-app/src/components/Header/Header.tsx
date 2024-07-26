@@ -1,10 +1,13 @@
 import * as React from "react";
 import { useContext } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext"; // Adjust import path as necessary
 
 interface IHeaderProps {}
 
 const Header: React.FunctionComponent<IHeaderProps> = () => {
+  const navigate = useNavigate();
   const context = useContext(UserContext);
   if (!context) {
     return <div>Error: User context not available</div>;
@@ -13,6 +16,25 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
   if (!user) {
     return <div>Loading...</div>;
   }
+
+  const handleLogout = () => {
+    try {
+      if (user) {
+        const confirmLogout = window.confirm(
+          "Are you sure you want to log out?"
+        );
+        if (confirmLogout) {
+          context.setUser(null);
+          toast.success("Logout successful !");
+          navigate("/login");
+        }
+      } else {
+        toast.error("User is not logged in");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <nav className="bg-[#FAF8F6] shadow-md flex items-center">
       <div className="container p-4 mx-auto max-w-screen-xl flex flex-wrap items-center  ">
@@ -28,7 +50,15 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           </span>
         </a>
       </div>
-      <div className="font-bold mr-4">Hello, {user.name} </div>
+      {user ? <div className="font-bold mr-8">Hello, {user.name} </div> : null}
+      <button
+        type="submit"
+        onClick={handleLogout}
+        className="h-8 p-2 bg-red-500 hover:bg-red hover:text-white text-center text-xs text-white border-spacing-14 mr-4 text-bold rounded font-bold "
+      >
+        {" "}
+        log out{" "}
+      </button>
     </nav>
   );
 };

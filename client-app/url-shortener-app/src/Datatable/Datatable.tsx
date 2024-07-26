@@ -1,15 +1,31 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { UrlData } from "../interface/UrlData";
 import { Link } from "react-router-dom";
 import { ServerUrl } from "../helper/Constants";
 import axios from "axios";
 
 interface IDataTableProps {
-  data: UrlData[];
+  initialData: UrlData[];
 }
 
 const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
-  const { data } = props;
+  const { initialData } = props;
+  const [data, setData] = useState<UrlData[]>(initialData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${ServerUrl}/shortUrl`);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const renderTableData = () => {
     if (!Array.isArray(data) || data.length === 0) {
       return (
@@ -36,8 +52,10 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
               {item.fullUrl}
             </Link>
           </td>
-          <td className="px-6 py-3">{item.createdAt.toString()}</td>
-          <td className=" px-6 py-3">
+          <td className="px-6 py-3">
+            {new Date(item.createdAt).toLocaleString()}
+          </td>
+          <td className="px-6 py-3">
             <div className="flex-content-center">
               <div
                 className="cursor-pointer px-2"
@@ -85,6 +103,7 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
       );
     });
   };
+
   const copyToClipboard = async (url: string) => {
     try {
       await navigator.clipboard.writeText(`${ServerUrl}/shortUrl/${url}`);
@@ -93,15 +112,17 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
       console.log(error);
     }
   };
+
   const deleteUrl = async (id: string) => {
     try {
       const response = await axios.delete(`${ServerUrl}/shortUrl/${id}`);
       console.log(response, `is deleted successfully`);
-      window.location.reload();
+      setData(data.filter((item) => item._id !== id));
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className="container mx-auto pt-2 pb-10">
       <div className="relative overflow-x-auto shadow-sm sm:rounded-lg">

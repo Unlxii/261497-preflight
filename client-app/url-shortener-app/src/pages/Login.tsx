@@ -30,6 +30,7 @@ const Login: React.FC = () => {
           email: "",
           password: "",
         });
+        toast.success("Login Successful, Welcome!");
         navigate("/dashboard");
       }
     } catch (error) {
