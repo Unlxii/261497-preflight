@@ -31,9 +31,11 @@ const Login: React.FC = () => {
           password: "",
         });
         navigate("/dashboard");
+        toast.success(`Login successful. Welcome back, ${user.name}!`);
       }
     } catch (error) {
       console.log(error);
+      toast.error("Invalid email or password.");
     }
   };
 
