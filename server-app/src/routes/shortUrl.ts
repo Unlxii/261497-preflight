@@ -4,8 +4,8 @@ import {
   deleteUrl,
   getAllUrl,
   getUrl,
+  getUserUrlsByUsername,
 } from "../controllers/shortUrl"; // Import all functions
-import { getUserUrls } from "../controllers/user";
 
 const router = express.Router();
 
@@ -13,5 +13,6 @@ router.post("/shortUrl", createUrl);
 router.get("/shortUrl", getAllUrl); // Fetch all short URLs (admin)
 router.get("/shortUrl/:id", getUrl);
 router.delete("/shortUrl/:id", deleteUrl);
+router.get("/shortUrl/:name/urls", getUserUrlsByUsername);
 
 export default router;
