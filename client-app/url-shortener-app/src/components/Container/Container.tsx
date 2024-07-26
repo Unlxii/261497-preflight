@@ -22,7 +22,7 @@ const Container: React.FunctionComponent<IContainerProps> = () => {
 
     try {
       const response = await axios.get(
-        `${ServerUrl}/public/user/username/${user.name}/shortUrls`
+        `${ServerUrl}/shortUrl/${user.name}/urls`
       );
       setData(response.data);
     } catch (error) {
