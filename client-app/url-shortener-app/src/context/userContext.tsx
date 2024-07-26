@@ -9,6 +9,7 @@ import React, {
 } from "react";
 
 interface User {
+  _id: any;
   id: string;
   name: string;
   email: string;
