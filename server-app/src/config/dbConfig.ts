@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
+  const mongoUri =
+    process.env.MONGO_URI || "mongodb://database:27017/shorterURL";
+
   try {
-    const connect = await mongoose.connect(`mongodb://localhost:27017/shorterURL`);
+    const connect = await mongoose.connect(mongoUri, {
+      serverSelectionTimeoutMS: 30000,
+    });
     console.log(
       "MongoDB Connected:",
       connect.connection.host,
