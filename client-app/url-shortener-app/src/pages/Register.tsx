@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { ServerUrl } from "../helper/Constants";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,14 +16,11 @@ const Register = () => {
     e.preventDefault();
     const { name, email, password } = data;
     try {
-      const { data } = await axios.post(
-        "http://localhost:5001/api/auth/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`${ServerUrl}/auth/register`, {
+        name,
+        email,
+        password,
+      });
       if (data.error) {
         toast.error(data.error);
       } else {

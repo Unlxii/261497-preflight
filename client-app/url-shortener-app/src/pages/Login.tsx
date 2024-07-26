@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/userContext";
+import { ServerUrl } from "../helper/Constants";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -16,13 +17,10 @@ const Login: React.FC = () => {
     e.preventDefault();
     const { email, password } = data;
     try {
-      const response = await axios.post(
-        "http://localhost:5001/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${ServerUrl}/auth/login`, {
+        email,
+        password,
+      });
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
