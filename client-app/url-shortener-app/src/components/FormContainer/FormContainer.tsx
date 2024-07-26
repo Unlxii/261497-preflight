@@ -1,17 +1,23 @@
 import * as React from "react";
 import axios from "axios";
 import { ServerUrl } from "../../helper/Constants";
+import { useUserContext } from "../../context/userContext"; // Import useUserContext hook
 
 interface IFormContainerProps {}
 
 const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
   const [url, setUrl] = React.useState<string>("");
-
+  const { user } = useUserContext();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!user) {
+      console.error("User is not logged in");
+      return;
+    }
     try {
       await axios.post(`${ServerUrl}/shortUrl`, {
         fullUrl: url,
+        userId: user._id,
       });
       setUrl("");
       window.location.reload();
@@ -36,23 +42,23 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
             Search
           </label>
           <div className="relative">
-          <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    strokeWidth="2" 
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-              </div>
+            <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
+              <svg
+                className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
             <input
               type="text"
               id="default-search"
