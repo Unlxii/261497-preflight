@@ -25,7 +25,7 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
       return (
         <tr
           key={item._id}
-          className="border-b text-white bg-gray-600 hover:bg-blue-tho hover:text-gray-80"
+          className="border-b text-white bg-gray-600 hover:bg-cyan-600 hover:text-gray-80"
         >
           <td className="px-6 py-3">
             <Link
