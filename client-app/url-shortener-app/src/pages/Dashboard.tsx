@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../context/userContext"; // Adjust import path as necessary
+import { UserContext } from "../context/userContext";
 import Container from "../components/Container/Container";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
