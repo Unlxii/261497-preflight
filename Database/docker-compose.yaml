@@ -1,0 +1,17 @@
+name: shorterurl # You can also change this to another name to avoid warning with existing group.
+version: "3.8"
+services:
+  database:
+    container_name: pf-db
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=root
+    #   - MONGO_INITDB_ROOT_PASSWORD=123456
+    #   - MONGO_INITDB_DATABASE=shorterURL
+    #   - MONGO_INITDB_USERNAME=Ton
+    #   - MONGO_INITDB_PASSWORD=111111
+    volumes:
+      # - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ./db:/data/db
