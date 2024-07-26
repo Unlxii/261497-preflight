@@ -1,23 +1,23 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14
+FROM node:22-slim
 
-# Set the working directory
-WORKDIR /app/src
+# Set working directory
+WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
+# Copy application files
 COPY . .
 
-# Expose the port your app runs on
+# Install dependencies
+RUN npm ci
+
+# Build the application
+RUN npm run build
+
+# Set environment variables
+ENV NODE_ENV production
+ENV PORT 5001
+
+# Expose the application port
 EXPOSE 5001
 
-# Define environment variable for MongoDB connection string
-ENV CONNECTION_STRING="mongodb+srv://nue0742:C3yGdZudWxKMAvsR@url-shorter.gwa6kec.mongodb.net/?retryWrites=true&w=majority&appName=url-shorter"
-
-# Run the app
+# Command to run the application
 CMD ["npm", "run", "start"]
