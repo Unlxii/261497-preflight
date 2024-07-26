@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    const connect = await mongoose.connect(`${process.env.CONNECTION_STRING}`);
+    const connect = await mongoose.connect(`mongodb://localhost:27017/shorterURL`);
     console.log(
       "MongoDB Connected:",
       connect.connection.host,
