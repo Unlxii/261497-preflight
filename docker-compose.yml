@@ -1,9 +1,0 @@
-services:
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - "./data/db:/data/db"
-    environment:
-      - MONGO_URL=mongodb+srv://nue0742:C3yGdZudWxKMAvsR@url-shorter.gwa6kec.mongodb.net/?retryWrites=true&w=majority&appName=url-shorter
