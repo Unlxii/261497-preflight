@@ -1,4 +1,5 @@
-FROM node:22-slim
+# Use a Debian-based Node.js image
+FROM node:22-bullseye
 
 # Set working directory
 WORKDIR /app
@@ -11,13 +12,7 @@ RUN npm ci
 
 # Build the application
 RUN npm run build
-
-# Set environment variables
 ENV NODE_ENV production
-ENV PORT 5001
-
-# Expose the application port
-EXPOSE 5001
 
 # Command to run the application
 CMD ["npm", "run", "start"]
