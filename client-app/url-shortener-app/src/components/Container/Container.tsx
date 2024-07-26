@@ -7,9 +7,7 @@ import axios from "axios";
 import DataTable from "../../Datatable/Datatable";
 import { useUserContext } from "../../context/userContext";
 
-interface IContainerProps {
-  addUrl: (url: string) => Promise<void>;
-}
+interface IContainerProps {}
 
 const Container: React.FunctionComponent<IContainerProps> = () => {
   const { user } = useUserContext();
@@ -35,17 +33,6 @@ const Container: React.FunctionComponent<IContainerProps> = () => {
     }
   };
 
-  const addUrl = async (url: string) => {
-    try {
-      const response = await axios.post(`${ServerUrl}/shortUrl`, {
-        fullUrl: url,
-      });
-      setData([...data, response.data]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     fetchTableData();
   }, [user]);
@@ -54,7 +41,7 @@ const Container: React.FunctionComponent<IContainerProps> = () => {
 
   return (
     <>
-      <FormContainer addUrl={addUrl} />
+      <FormContainer />
       <DataTable initialData={data} />
     </>
   );

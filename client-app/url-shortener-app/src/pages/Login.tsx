@@ -30,7 +30,6 @@ const Login: React.FC = () => {
           email: "",
           password: "",
         });
-        toast.success("Login Successful, Welcome!");
         navigate("/dashboard");
         toast.success(`Login successful. Welcome back, ${user.name}!`);
       }

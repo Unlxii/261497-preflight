@@ -3,9 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { ServerUrl } from "../../helper/Constants";
 import { useUserContext } from "../../context/userContext";
-interface IFormContainerProps {
-  addUrl: (url: string) => Promise<void>;
-}
+interface IFormContainerProps {}
 
 const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
   const [url, setUrl] = useState<string>("");
