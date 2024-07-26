@@ -36,12 +36,10 @@ export const createUrl = async (req: Request, res: Response) => {
     }
   } catch (error: unknown) {
     console.error("Error creating URL:", error);
-    res
-      .status(500)
-      .json({
-        message: "Server error",
-        error: error instanceof Error ? error.message : "Unknown error",
-      });
+    res.status(500).json({
+      message: "Server error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
   }
 };
 
@@ -88,18 +86,22 @@ export const deleteUrl = async (
     res.status(500).send({ message: "Something went wrong!" });
   }
 };
-export const getUserUrls = async (req: Request, res: Response) => {
+
+export const getUserUrlsByUsername = async (req: Request, res: Response) => {
   try {
-    const userId = req.params.userId;
-    const user = await UserModel.findById(userId).populate('urls');
+    const { name } = req.params;
+    const user = await UserModel.findOne({ name }).populate("urls");
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json(user.urls); // Send user's URLs as JSON response
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(200).json(user.urls);
+  } catch (error) {
+    console.error("Error fetching user URLs:", error);
+    res.status(500).json({
+      message: "Server error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
   }
 };
