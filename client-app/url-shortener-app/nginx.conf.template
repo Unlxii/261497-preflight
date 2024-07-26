@@ -21,5 +21,8 @@ server {
         proxy_pass ${NGINX_PROXY};
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+        add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization";
     }
 }
