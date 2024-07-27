@@ -17,11 +17,11 @@ const shortUrlSchema = new mongoose.Schema(
       default: 0,
     },
     createdAt: {
-      type: Date,
+      type: String, 
       default: () => {
         const date = new Date();
         date.setUTCHours(date.getUTCHours() + 7);
-        return date;
+        return date.toISOString().replace('T', ' ').slice(0, -5);
       },
       immutable: true,
     },

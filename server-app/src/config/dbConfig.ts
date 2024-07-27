@@ -1,13 +1,22 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
-    try {
-        const connect = await mongoose.connect(`${process.env.CONNECTION_STRING}`);
-    console.log("MongoDB Connected:" ,connect.connection.host,connect.connection.name);
-    }catch (error) {
-console.log("Error:",error);
-process.exit(1);
-    }
-}
+  const mongoUri =
+    process.env.MONGO_URI || "mongodb://database:27017/shorterURL";
+
+  try {
+    const connect = await mongoose.connect(mongoUri, {
+      serverSelectionTimeoutMS: 30000,
+    });
+    console.log(
+      "MongoDB Connected:",
+      connect.connection.host,
+      connect.connection.name
+    );
+  } catch (error) {
+    console.log("Error:", error);
+    process.exit(1);
+  }
+};
 
 export default connectDB;

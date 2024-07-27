@@ -17,9 +17,11 @@
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.24.0",
     "rect": "^1.2.1",
-    "router": "^1.3.8"
+    "router": "^1.3.8",
+    "toaster": "^0.1.2"
   },
   "devDependencies": {
+    "@types/node": "^20.14.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",

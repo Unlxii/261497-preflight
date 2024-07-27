@@ -1,6 +1,6 @@
-const User = require("../models/user");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 import { Request, Response } from "express";
+import UserModel from "../models/user";
 import jwt from "jsonwebtoken";
 
 // register endpoint
@@ -20,7 +20,7 @@ export const registerUser = async (req: Request, res: Response) => {
       });
     }
     // Check email
-    const exist = await User.findOne({ email });
+    const exist = await UserModel.findOne({ email });
     if (exist) {
       return res.json({
         error: "Email is already taken",
@@ -28,7 +28,11 @@ export const registerUser = async (req: Request, res: Response) => {
     }
     const hashedPassword = await hashPassword(password);
     // create user in DB
-    const user = await User.create({ name, email, password: hashedPassword });
+    const user = await UserModel.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
     return res.json(user);
   } catch (error) {
     console.log(error);
@@ -40,7 +44,7 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await UserModel.findOne({ email });
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
@@ -71,7 +75,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-// Get profile endpoint
+//Get profile endpoint
 export const getProfile = async (req: Request, res: Response) => {
   const { token } = await req.cookies;
 

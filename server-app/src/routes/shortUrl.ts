@@ -1,11 +1,18 @@
-import express from 'express';
-import { createUrl, deleteUrl, getAllUrl, getUrl } from '../controllers/shortUrl';
+import express from "express";
+import {
+  createUrl,
+  deleteUrl,
+  getAllUrl,
+  getUrl,
+  getUserUrlsByUsername,
+} from "../controllers/shortUrl"; // Import all functions
 
 const router = express.Router();
 
-router.post('/shortUrl', createUrl);
-router.get('/shortUrl', getAllUrl);
-router.get('/shortUrl/:id', getUrl);
-router.delete('/shortUrl/:id', deleteUrl);
+router.post("/shortUrl", createUrl);
+router.get("/shortUrl", getAllUrl); // Fetch all short URLs (admin)
+router.get("/shortUrl/:id", getUrl);
+router.delete("/shortUrl/:id", deleteUrl);
+router.get("/shortUrl/:name/urls", getUserUrlsByUsername);
 
 export default router;
