@@ -10,7 +10,7 @@ import React, {
 import { ServerUrl } from "../helper/Constants";
 
 interface User {
-  _id: any;
+  _id: string;
   id: string;
   name: string;
   email: string;
