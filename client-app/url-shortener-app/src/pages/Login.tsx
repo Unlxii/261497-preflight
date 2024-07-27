@@ -40,7 +40,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-blue-400 justify-center items-center">
+    <div className="flex h-screen bg-gradient-to-r from-cyan-500 to-blue-500 justify-center items-center">
       <div className="p-4">
         <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
           <h1 className="text-center font-bold text-xl">Sign In</h1>
