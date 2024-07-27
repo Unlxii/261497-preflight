@@ -4,6 +4,8 @@ import { UrlData } from "../interface/UrlData";
 import { Link } from "react-router-dom";
 import { ServerUrl } from "../helper/Constants";
 import axios from "axios";
+import FormContainer from "../components/FormContainer/FormContainer";
+import { useUserContext } from "../context/userContext";
 
 interface IDataTableProps {
   initialData: UrlData[];
@@ -12,17 +14,24 @@ interface IDataTableProps {
 const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   const { initialData } = props;
   const [data, setData] = useState<UrlData[]>(initialData);
+  const { user } = useUserContext();
+
+  const fetchData = async () => {
+    if (!user) {
+      console.error("User is not logged in");
+      return;
+    }
+    try {
+      const response = await axios.get(
+        `${ServerUrl}/shortUrl/${user._id}/urls`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${ServerUrl}/shortUrl`);
-        setData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -125,17 +134,18 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
 
   return (
     <div className="container mx-auto pt-2 pb-10">
+      <FormContainer fetchData={fetchData} />
       <div className="relative overflow-x-auto shadow-sm sm:rounded-lg">
         <table className="w-full table-fixed text-sm text-left rtl:text-right text-gray-500">
           <thead className="bg-gray-800 text-md uppercase text-gray-50 font-Paytone One">
             <tr>
-              <th scope="col" className="px-6 py-3  ">
+              <th scope="col" className="px-6 py-3">
                 FullUrl
               </th>
-              <th scope="col" className="px-6 py-3  ">
+              <th scope="col" className="px-6 py-3">
                 TIME
               </th>
-              <th scope="col" className="px-6 py-3  "></th>
+              <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>{renderTableData()}</tbody>
@@ -144,5 +154,4 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
     </div>
   );
 };
-
 export default DataTable;

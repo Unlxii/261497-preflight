@@ -7,6 +7,7 @@ import React, {
   FC,
   useContext,
 } from "react";
+import { ServerUrl } from "../helper/Constants";
 
 interface User {
   _id: any;
@@ -39,9 +40,7 @@ export const UserContextProvider: FC<UserContextProviderProps> = ({
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get<User>(
-          "http://localhost:5001/api/auth/profile"
-        );
+        const response = await axios.get<User>(`${ServerUrl}/auth/profile`);
         setUser(response.data);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
