@@ -15,12 +15,10 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   const { initialData } = props;
   const [data, setData] = useState<UrlData[]>(initialData);
   const { user } = useUserContext();
-  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async () => {
     if (!user) {
       console.error("User is not logged in");
-      setLoading(false);
       return;
     }
     try {
