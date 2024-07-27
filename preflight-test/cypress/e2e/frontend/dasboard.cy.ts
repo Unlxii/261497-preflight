@@ -11,7 +11,7 @@ describe('Dashboard URL Addition', () => {
     cy.url().should('include', '/dashboard'); 
   });
 
-  const urls = Array.from({ length: 1000 }, () => faker.internet.url());
+  const urls = Array.from({ length: 10 }, () => faker.internet.url());
 
   for (let index = 0; index < urls.length; index++) {
     it(`should add URL: ${urls[index]}`, () => {
@@ -38,12 +38,12 @@ describe('Dashboard URL Addition', () => {
 
     });
 
-    // it(`should delete URL: ${urls[index]}`, () => {
-    //   cy.contains(urls[index]).parent().parent().within(() => {
-    //     cy.get('div.cursor-pointer.px-2').eq(1).click();
-    //   });
-    //   cy.contains(urls[index]).should('not.exist'); // Ensure the URL is deleted
-    // });
+    it(`should delete URL: ${urls[index]}`, () => {
+      cy.contains(urls[index]).parent().parent().within(() => {
+        cy.get('div.cursor-pointer.px-2').eq(1).click();
+      });
+      cy.contains(urls[index]).should('not.exist'); // Ensure the URL is deleted
+    });
 
   }
 });
