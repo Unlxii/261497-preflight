@@ -36,7 +36,7 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
     }
   };
   return (
-    <nav className="bg-[#FAF8F6] shadow-md flex items-center">
+    <nav className="bg-[#FAF8F6] shadow-md flex items-center fixed w-full">
       <div className="container p-4 mx-auto max-w-screen-xl flex flex-wrap items-center  ">
         <text className="text-gray-900 not-italic font-Paytone One text-3xl antialiased font-bold">
           <span className="hover:drop-shadow-sm">
