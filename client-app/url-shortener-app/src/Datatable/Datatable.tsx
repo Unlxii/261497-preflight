@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ServerUrl } from "../helper/Constants";
 import axios from "axios";
 import FormContainer from "../components/FormContainer/FormContainer";
+import { useUserContext } from "../context/userContext";
 
 interface IDataTableProps {
   initialData: UrlData[];
@@ -13,10 +14,19 @@ interface IDataTableProps {
 const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   const { initialData } = props;
   const [data, setData] = useState<UrlData[]>(initialData);
+  const { user } = useUserContext();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async () => {
+    if (!user) {
+      console.error("User is not logged in");
+      setLoading(false);
+      return;
+    }
     try {
-      const response = await axios.get(`${ServerUrl}/shortUrl`);
+      const response = await axios.get(
+        `${ServerUrl}/shortUrl/${user._id}/urls`
+      );
       setData(response.data);
     } catch (error) {
       console.log(error);
