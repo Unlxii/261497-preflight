@@ -20,7 +20,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
         userId: user._id,
       });
       setUrl("");
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.log(error);
     }
