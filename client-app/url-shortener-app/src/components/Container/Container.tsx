@@ -13,6 +13,19 @@ const Container: React.FunctionComponent<IContainerProps> = () => {
   const [data, setData] = useState<UrlData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${ServerUrl}/shortUrl/:userId/urls`);
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const fetchTableData = async () => {
     if (!user) {
       console.error("User is not logged in");
@@ -22,7 +35,7 @@ const Container: React.FunctionComponent<IContainerProps> = () => {
 
     try {
       const response = await axios.get(
-        `${ServerUrl}/shortUrl/${user.name}/urls`
+        `${ServerUrl}/shortUrl/${user._id}/urls`
       );
       setData(response.data);
     } catch (error) {
