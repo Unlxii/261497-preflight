@@ -41,7 +41,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = ({
           "KEEP YOUR URLs"
         </h2>
         <p className="text-center text-gray-900 not-italic font-Paytone One text-[22px] antialiased font-normal pb-32 ">
-          This tool for shorten a URL or reduce link :)
+          This tool for shorten a URL or reduce link
         </p>
         <form className="max-w-[956px] mx-auto" onSubmit={handleSubmit}>
           <label
