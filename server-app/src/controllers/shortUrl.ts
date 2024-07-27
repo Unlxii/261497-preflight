@@ -101,3 +101,39 @@ export const getUserUrlsByUsername = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const deleteUrlbyUserId = async (req: Request, res: Response) => {
+  try {
+    const { userId, urlId } = req.params;
+
+    if (!userId || !Types.ObjectId.isValid(userId) || !urlId || !Types.ObjectId.isValid(urlId)) {
+      return res.status(400).json({ message: "Invalid User ID or URL ID" });
+    }
+
+    const userObjectId = new Types.ObjectId(userId);
+    const urlObjectId = new Types.ObjectId(urlId);
+
+    const user = await UserModel.findById(userObjectId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const urlIndex = user.urls.indexOf(new Types.ObjectId(urlObjectId.toString()));
+    if (urlIndex === -1) {
+      return res.status(404).json({ message: "URL not found" });
+    }
+
+    user.urls.splice(urlIndex, 1);
+    await user.save();
+    await urlModel.findByIdAndDelete(urlObjectId);
+
+    res.status(200).json({ message: "URL deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting URL:", error);
+    res.status(500).json({
+      message: "Server error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+};
+

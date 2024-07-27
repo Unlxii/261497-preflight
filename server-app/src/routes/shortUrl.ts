@@ -2,6 +2,7 @@ import express from "express";
 import {
   createUrl,
   deleteUrl,
+  deleteUrlbyUserId,
   getAllUrl,
   getUrl,
   getUserUrlsByUsername,
@@ -14,5 +15,6 @@ router.get("/shortUrl", getAllUrl); // Fetch all short URLs (admin)
 router.get("/shortUrl/:id", getUrl);
 router.delete("/shortUrl/:id", deleteUrl);
 router.get("/shortUrl/:userId/urls", getUserUrlsByUsername);
+router.delete("/shortUrl/:userId/:urlId", deleteUrlbyUserId);
 
 export default router;

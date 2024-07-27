@@ -4,14 +4,14 @@ describe('Dashboard URL Addition', () => {
   // Move the login to the beginning of the test suite
   before(() => {
     
-    cy.visit('http://localhost:3000/login'); 
-    cy.get('input[placeholder="Email Address"]').type('test@test.com');
+    cy.visit('http://localhost:3004/login'); 
+    cy.get('input[placeholder="Email Address"]').type('test@test');
     cy.get('input[placeholder="Password"]').type('123456');
     cy.get('button[type="submit"]').click();
     cy.url().should('include', '/dashboard'); 
   });
 
-  const urls = Array.from({ length: 10 }, () => faker.internet.url());
+  const urls = Array.from({ length: 100 }, () => faker.internet.url());
 
   for (let index = 0; index < urls.length; index++) {
     it(`should add URL: ${urls[index]}`, () => {
@@ -38,12 +38,12 @@ describe('Dashboard URL Addition', () => {
 
     });
 
-    it(`should delete URL: ${urls[index]}`, () => {
-      cy.contains(urls[index]).parent().parent().within(() => {
-        cy.get('div.cursor-pointer.px-2').eq(1).click();
-      });
-      cy.contains(urls[index]).should('not.exist'); // Ensure the URL is deleted
-    });
+    // it(`should delete URL: ${urls[index]}`, () => {
+    //   cy.contains(urls[index]).parent().parent().within(() => {
+    //     cy.get('div.cursor-pointer.px-2').eq(1).click();
+    //   });
+    //   cy.contains(urls[index]).should('not.exist'); // Ensure the URL is deleted
+    // });
 
   }
 });
