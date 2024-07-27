@@ -3,11 +3,17 @@ import axios from "axios";
 import { useState } from "react";
 import { ServerUrl } from "../../helper/Constants";
 import { useUserContext } from "../../context/userContext";
-interface IFormContainerProps {}
 
-const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
+interface IFormContainerProps {
+  fetchData: () => void;
+}
+
+const FormContainer: React.FunctionComponent<IFormContainerProps> = ({
+  fetchData,
+}) => {
   const [url, setUrl] = useState<string>("");
   const { user } = useUserContext();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) {
@@ -20,11 +26,12 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
         userId: user._id,
       });
       setUrl("");
-      window.location.reload();
+      fetchData(); // Fetch the data after adding a new URL
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className="container mx-auto p-2">
       <div className="bg-banner my-8 rounded-xl bg-cover">
