@@ -6,6 +6,7 @@ import { ServerUrl } from "../helper/Constants";
 import axios from "axios";
 import FormContainer from "../components/FormContainer/FormContainer";
 import { useUserContext } from "../context/userContext";
+import toast from "react-hot-toast";
 
 interface IDataTableProps {
   initialData: UrlData[];
@@ -116,7 +117,7 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   const copyToClipboard = async (url: string) => {
     try {
       await navigator.clipboard.writeText(`${ServerUrl}/shortUrl/${url}`);
-      alert(`Copied to clipboard :${ServerUrl}/shortUrl/${url} `);
+      toast.success("URL copied to clipboard successfully.");
     } catch (error) {
       console.log(error);
     }
@@ -127,6 +128,7 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
       const response = await axios.delete(`${ServerUrl}/shortUrl/${id}`);
       console.log(response, `is deleted successfully`);
       setData(data.filter((item) => item._id !== id));
+      toast.success("URL removed successfully.");
     } catch (error) {
       console.log(error);
     }
