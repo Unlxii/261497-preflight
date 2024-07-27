@@ -1,5 +1,5 @@
 import { urlModel } from "../models/shortUrl";
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import UserModel from "../models/user";
 import { Request, Response } from "express";
 
@@ -86,6 +86,11 @@ export const deleteUrl = async (req: Request, res: Response) => {
 export const getUserUrlsByUsername = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid userId provided" });
+    }
+
     const user = await UserModel.findById(userId).populate("urls");
 
     if (!user) {
