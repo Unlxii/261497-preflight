@@ -1,4 +1,3 @@
-import express from "express";
 import { urlModel } from "../models/shortUrl";
 import { Types } from "mongoose";
 import UserModel from "../models/user";
@@ -34,7 +33,7 @@ export const createUrl = async (req: Request, res: Response) => {
       await user.save();
       return res.status(201).json(shortUrl);
     }
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Error creating URL:", error);
     res.status(500).json({
       message: "Server error",
@@ -43,14 +42,11 @@ export const createUrl = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllUrl = async (
-  req: express.Request,
-  res: express.Response
-) => {
+export const getAllUrl = async (req: Request, res: Response) => {
   try {
     const shortUrls = await urlModel.find();
-    if (shortUrls.length < 0) {
-      res.status(400).send("shortUrl not found");
+    if (!shortUrls.length) {
+      res.status(404).send("Short URLs not found");
     } else {
       res.status(200).send(shortUrls);
     }
@@ -59,28 +55,28 @@ export const getAllUrl = async (
   }
 };
 
-export const getUrl = async (req: express.Request, res: express.Response) => {
+export const getUrl = async (req: Request, res: Response) => {
   try {
     const shortUrl = await urlModel.findOne({ shortUrl: req.params.id });
     if (!shortUrl) {
       res.status(404).send("Full ShortUrl not found!");
     } else {
       shortUrl.click++;
-      shortUrl.save();
-      res.redirect(`${shortUrl.fullUrl}`);
+      await shortUrl.save();
+      res.redirect(shortUrl.fullUrl);
     }
   } catch (error) {
     res.status(500).send({ message: "Something went wrong!" });
   }
 };
-export const deleteUrl = async (
-  req: express.Request,
-  res: express.Response
-) => {
+
+export const deleteUrl = async (req: Request, res: Response) => {
   try {
-    const shortUrl = await urlModel.findByIdAndDelete({ _id: req.params.id });
+    const shortUrl = await urlModel.findByIdAndDelete(req.params.id);
     if (shortUrl) {
-      res.status(200).send("Request URL deleted successfully");
+      res.status(200).send("URL deleted successfully");
+    } else {
+      res.status(404).send("URL not found");
     }
   } catch (error) {
     res.status(500).send({ message: "Something went wrong!" });
@@ -89,8 +85,8 @@ export const deleteUrl = async (
 
 export const getUserUrlsByUsername = async (req: Request, res: Response) => {
   try {
-    const { name } = req.params;
-    const user = await UserModel.findOne({ name }).populate("urls");
+    const { userId } = req.params;
+    const user = await UserModel.findById(userId).populate("urls");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
