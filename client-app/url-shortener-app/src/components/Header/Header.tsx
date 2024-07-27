@@ -25,7 +25,7 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
         );
         if (confirmLogout) {
           context.setUser(null);
-          toast.success("Logout successful!");
+          toast.success("Logout successful.");
           navigate("/login");
         }
       } else {
