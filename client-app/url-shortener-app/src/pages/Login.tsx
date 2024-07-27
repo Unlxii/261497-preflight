@@ -43,6 +43,7 @@ const Login: React.FC = () => {
     <div className="flex h-screen bg-gradient-to-r from-cyan-500 to-blue-500 justify-center items-center">
       <div className="p-4">
         <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+          <div className="text-center text-4xl text-blue-700 font-bold">KEEP.</div>
           <h1 className="text-center font-bold text-xl">Sign In</h1>
           <form onSubmit={loginUser} className="w-screen">
             <label>Email</label>
