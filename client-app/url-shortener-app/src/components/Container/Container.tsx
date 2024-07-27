@@ -1,5 +1,4 @@
 import * as React from "react";
-import FormContainer from "../FormContainer/FormContainer";
 import { UrlData } from "../../interface/UrlData";
 import { ServerUrl } from "../../helper/Constants";
 import { useState, useEffect } from "react";
@@ -41,7 +40,6 @@ const Container: React.FunctionComponent<IContainerProps> = () => {
 
   return (
     <>
-      <FormContainer />
       <DataTable initialData={data} />
     </>
   );
