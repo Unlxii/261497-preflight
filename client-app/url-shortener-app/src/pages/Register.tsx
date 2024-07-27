@@ -63,14 +63,14 @@ const Register = () => {
             />
             <button
               type="submit"
-              className="h-7 bg-blue-500 text-center text-xs text-white rounded w-full"
+              className="h-7 bg-blue-500 hover:bg-blue-600 text-center text-xs text-white rounded w-full"
             >
               Sign Up
             </button>
           </form>
           <div className="text-gray-500 text-sm mt-2">
             Already registered?{" "}
-            <a href="/login" className="text-blue-500">
+            <a href="/login" className="text-blue-500 hover:text-blue-600">
               Sign In
             </a>
           </div>

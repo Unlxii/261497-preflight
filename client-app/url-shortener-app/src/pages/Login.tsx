@@ -65,14 +65,14 @@ const Login: React.FC = () => {
             </div>
             <button
               type="submit"
-              className="h-7 bg-blue-500 text-center text-xs text-white rounded w-full mt-1"
+              className="h-7 bg-blue-500 text-center text-xs text-white rounded w-full mt-1 hover:bg-blue-600"
             >
               Submit
             </button>
           </form>
           <div className="text-gray-500 mt-4 text-sm">
             don't have an account?{" "}
-            <a className="text-blue-500" href="/register">
+            <a className="text-blue-500 hover:text-blue-600" href="/register">
               Register
             </a>
           </div>
