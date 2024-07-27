@@ -13,6 +13,6 @@ router.post("/shortUrl", createUrl);
 router.get("/shortUrl", getAllUrl); // Fetch all short URLs (admin)
 router.get("/shortUrl/:id", getUrl);
 router.delete("/shortUrl/:id", deleteUrl);
-router.get("/shortUrl/:name/urls", getUserUrlsByUsername);
+router.get("/shortUrl/:userId/urls", getUserUrlsByUsername);
 
 export default router;
