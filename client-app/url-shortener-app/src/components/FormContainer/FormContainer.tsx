@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { ServerUrl } from "../../helper/Constants";
 import { useUserContext } from "../../context/userContext";
+import toast from "react-hot-toast";
 
 interface IFormContainerProps {
   fetchData: () => void;
@@ -23,9 +24,10 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = ({
     try {
       await axios.post(`${ServerUrl}/shortUrl`, {
         fullUrl: url,
-        userId: user._id,
+        userId: user._id.toString(),
       });
       setUrl("");
+      toast.success("Added URLs.");
       fetchData(); // Fetch the data after adding a new URL
     } catch (error) {
       console.log(error);
@@ -79,7 +81,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = ({
             />
             <button
               type="submit"
-              className="absolute top-2 end-2.5 p-2.5 text-sm font-medium h-lg text-black-100 bg-gray-200 rounded-full border-#1D1C1ADB focus:ring-2 focus:outline-none"
+              className="absolute top-2 end-2.5 p-2.5 text-sm font-medium h-lg text-black-100 bg-gray-200 hover:bg-gray-300 rounded-full border-#1D1C1ADB focus:ring-2 focus:outline-none"
             >
               Add
             </button>
