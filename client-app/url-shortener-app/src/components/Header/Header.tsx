@@ -38,17 +38,14 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
   return (
     <nav className="bg-[#FAF8F6] shadow-md flex items-center">
       <div className="container p-4 mx-auto max-w-screen-xl flex flex-wrap items-center  ">
-        <a
-          href="http://localhost:3000"
-          className="text-gray-900 not-italic font-Paytone One text-3xl antialiased font-bold"
-        >
+        <text className="text-gray-900 not-italic font-Paytone One text-3xl antialiased font-bold">
           <span className="hover:drop-shadow-sm">
             KEEP.
             <sup className="text-indigo-300 not-italic font-bold top-[-25px] right-[7px] text-sm">
               yourlinks :)
             </sup>
           </span>
-        </a>
+        </text>
       </div>
       {user ? <div className="font-bold mr-8">Hello, {user.name} </div> : null}
       <button
