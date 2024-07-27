@@ -44,6 +44,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="e.g FullStack"
+              maxLength={16}
               value={data.name}
               onChange={(e) => setData({ ...data, name: e.target.value })}
             />
